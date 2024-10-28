@@ -14,6 +14,9 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @Entity
+/**
+ * Bean BDD représentant une tache
+ */
 public class Task {
 
     @jakarta.persistence.Id

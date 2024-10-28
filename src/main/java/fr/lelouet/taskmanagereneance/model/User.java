@@ -11,6 +11,9 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
+/**
+ * Bean BDD représentant un utilisateur
+ */
 public class User {
 
     @jakarta.persistence.Id
