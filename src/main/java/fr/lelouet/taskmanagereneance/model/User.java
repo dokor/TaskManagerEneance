@@ -9,6 +9,8 @@ import org.springframework.data.annotation.Id;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDate;
+
 @Getter
 @Setter
 @Entity
@@ -23,11 +25,10 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String email;
+    private String email; // Définit l'unicité d'un point de vue utilisateur.
     private String firstName;
     private String lastName;
     private String password;
-
-    // TODO alelouet : add dates crea/modif
+    private LocalDate createDate;
 
 }
