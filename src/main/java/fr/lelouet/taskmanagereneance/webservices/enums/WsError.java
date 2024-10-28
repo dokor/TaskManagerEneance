@@ -3,11 +3,11 @@ package fr.lelouet.taskmanagereneance.webservices.enums;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-@Getter
-@AllArgsConstructor
 /**
  * Listing des erreurs WS disponibles pour le projet dans le cas de réponses API "invalides".
  */
+@Getter
+@AllArgsConstructor
 public enum WsError {
     INVALID_INPUT("INVALID_INPUT", "Invalid input provided"),
     UNAUTHORIZED_ACCESS("UNAUTHORIZED_ACCESS", "Unauthorized access"),
