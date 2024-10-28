@@ -1,4 +1,4 @@
-package fr.lelouet.taskmanagereneance.webservices;
+package fr.lelouet.taskmanagereneance.webservices.user;
 
 import fr.lelouet.taskmanagereneance.controller.UserController;
 import fr.lelouet.taskmanagereneance.model.User;
