@@ -14,7 +14,8 @@ public enum WsError {
     INTERNAL_SERVER_ERROR("INTERNAL_SERVER_ERROR", "Internal server error"),
     // USER Errors
     USER_NOT_FOUND("USER_NOT_FOUND", "User not found"),
-    USER_CANT_BE_CREATED("USER_CANT_BE_CREATED", "User can't be created")
+    USER_CANT_BE_CREATED("USER_CANT_BE_CREATED", "User can't be created"),
+    USER_CANT_LOGIN("USER_CANT_LOGIN", "User can't be logged")
     // TASK Errors
     ;
 
