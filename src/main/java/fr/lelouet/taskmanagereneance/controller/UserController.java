@@ -3,22 +3,24 @@ package fr.lelouet.taskmanagereneance.controller;
 import fr.lelouet.taskmanagereneance.model.User;
 import fr.lelouet.taskmanagereneance.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Service;
 
-@RestController
-@RequestMapping("/users")
+import java.util.Optional;
+
+/**
+ * Controller du JPA User
+ */
+@Service
 public class UserController {
 
     @Autowired
     private UserService userService;
 
-    @PostMapping("/register")
-    public ResponseEntity<User> registerUser(@RequestBody User user) {
-        User newUser = userService.registerUser(user);
-        return ResponseEntity.ok(newUser);
+    public User registerUser(User user) {
+        return userService.registerUser(user);
+    }
+
+    public Optional<User> findById(Long id) {
+        return userService.findById(id);
     }
 }

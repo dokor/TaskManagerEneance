@@ -7,6 +7,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+/**
+ * Service fonctionelle de gestion des utilisateurs
+ * // TODO alelouet : a diviser en service fonctionelle si besoin
+ */
 @Service
 public class UserService {
 
@@ -19,5 +23,9 @@ public class UserService {
 
     public Optional<User> findByEmail(String email) {
         return userRepository.findByEmail(email);
+    }
+
+    public Optional<User> findById(Long id) {
+        return userRepository.findById(id);
     }
 }
