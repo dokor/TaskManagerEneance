@@ -23,4 +23,6 @@ public class User {
     private String lastName;
     private String password;
 
+    // TODO alelouet : add dates crea/modif
+
 }
