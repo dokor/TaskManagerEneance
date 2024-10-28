@@ -22,6 +22,6 @@ public enum WsError {
     private final String defaultMessage;
 
     public String formatMessage(String specificMessage) {
-        return String.format("%s: %s", code, specificMessage != null ? specificMessage : defaultMessage);
+        return String.format("%s", specificMessage != null ? specificMessage : defaultMessage);
     }
 }
