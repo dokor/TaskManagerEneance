@@ -1,4 +1,4 @@
-package fr.lelouet.taskmanagereneance.webservices.utils;
+package fr.lelouet.taskmanagereneance.webservices.utils.error_handler;
 
 import fr.lelouet.taskmanagereneance.webservices.enums.WsError;
 
