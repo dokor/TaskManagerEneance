@@ -5,6 +5,11 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import org.springframework.data.annotation.Id;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 @Entity
 public class User {
 
@@ -17,5 +22,5 @@ public class User {
     private String firstName;
     private String lastName;
     private String password;
-    
+
 }
