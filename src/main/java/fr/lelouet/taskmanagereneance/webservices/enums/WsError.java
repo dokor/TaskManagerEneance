@@ -15,7 +15,8 @@ public enum WsError {
     // USER Errors
     USER_NOT_FOUND("USER_NOT_FOUND", "User not found"),
     USER_CANT_BE_CREATED("USER_CANT_BE_CREATED", "User can't be created"),
-    USER_CANT_LOGIN("USER_CANT_LOGIN", "User can't be logged")
+    USER_CANT_LOGIN("USER_CANT_LOGIN", "User can't be logged"),
+    EMAIL_ALREADY_EXISTS("EMAIL_ALREADY_EXISTS", "Email already in use")
     // TASK Errors
     ;
 

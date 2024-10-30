@@ -3,9 +3,12 @@ package fr.lelouet.taskmanagereneance.webservices.utils.jwt;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.security.Keys;
 import org.springframework.stereotype.Component;
 
+import java.security.Key;
 import java.util.Date;
+import java.util.Map;
 
 /**
  * Composant utilitaire permettant de construire et utiliser un token simple
@@ -15,14 +18,19 @@ public class JwtUtil {
 
     // Le secret est laissé ici afin de simplifier le projet, dans un cas réel de projet cliens,
     // à déplacer dans une configuration serveur protégé
-    private final String SECRET_KEY = "test_technique_eneance";
+    private static final Key SECRET_KEY = Keys.secretKeyFor(SignatureAlgorithm.HS256);
 
-    public String generateToken(String username) {
+    public String generateToken(String username, Long userId, String firstName, String lastName) {
         return Jwts.builder()
             .setSubject(username)
             .setIssuedAt(new Date())
             .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10)) // 10 heures
-            .signWith(SignatureAlgorithm.HS256, SECRET_KEY)
+            .addClaims(Map.of(
+                "userId", userId,
+                "firstName", firstName,
+                "lastName", lastName
+            ))
+            .signWith(SECRET_KEY)
             .compact();
     }
 

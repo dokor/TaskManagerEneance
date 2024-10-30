@@ -2,8 +2,11 @@ package fr.lelouet.taskmanagereneance.webservices.user;
 
 import fr.lelouet.taskmanagereneance.controller.UserController;
 import fr.lelouet.taskmanagereneance.model.User;
+import fr.lelouet.taskmanagereneance.service.CustomUserDetailsService;
 import fr.lelouet.taskmanagereneance.webservices.enums.WsError;
 import fr.lelouet.taskmanagereneance.webservices.user.bean.LoginRequest;
+import fr.lelouet.taskmanagereneance.webservices.user.bean.UserRegisterRequest;
+import fr.lelouet.taskmanagereneance.webservices.user.bean.UserResponse;
 import fr.lelouet.taskmanagereneance.webservices.utils.error_handler.EneanceException;
 import fr.lelouet.taskmanagereneance.webservices.utils.jwt.JwtUtil;
 import fr.lelouet.taskmanagereneance.webservices.utils.jwt.UserSession;
@@ -27,7 +30,6 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/users")
-@PreAuthorize("isAuthenticated()") // Par défault, le WS demande une authentification
 public class UserWs {
 
     @Autowired
@@ -39,13 +41,23 @@ public class UserWs {
     @Autowired
     private JwtUtil jwtUtil;
 
+    @Autowired
+    private CustomUserDetailsService userDetailsService;
+
     // Défini comme sans authentification dans SecurityConfig
     @PostMapping("/register")
-    public ResponseEntity<User> registerUser(@RequestBody User user) {
+    @PreAuthorize("permitAll()")
+    public ResponseEntity<UserResponse> registerUser(@RequestBody UserRegisterRequest userRegisterRequest) {
         try {
-            User newUser = userController.registerUser(user);
-            // TODO alelouet : Ne pas renvoyer le password, renvoyer un bean réduit car WS non authenth
-            return ResponseEntity.ok(newUser);
+            User newUser = userController.registerUser(userRegisterRequest);
+            // TODO alelouet : ajouter validation des données
+            UserResponse userResponse = new UserResponse(
+                newUser.getId(),
+                newUser.getEmail(),
+                newUser.getFirstName(),
+                newUser.getLastName()
+            );
+            return ResponseEntity.ok(userResponse);
         } catch (Exception e) {
             // On ne donne volontairement pas d'informations sur l'erreur au front
             throw new EneanceException(WsError.USER_CANT_BE_CREATED);
@@ -54,11 +66,14 @@ public class UserWs {
 
     // Défini comme sans authentification dans SecurityConfig
     @PostMapping("/login")
+    @PreAuthorize("permitAll()")
     public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
         try {
             Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginRequest.getLogin(), loginRequest.getPassword()));
-            String jwt = jwtUtil.generateToken(loginRequest.getLogin());
+            // Si l'authentification réussit, charger les vraies informations utilisateur
+            User user = (User) userDetailsService.loadUserByUsername(loginRequest.getLogin());
+            String jwt = jwtUtil.generateToken(user.getUsername(), user.getId(), user.getFirstName(), user.getLastName());
             return ResponseEntity.ok(new UserSession(jwt));
         } catch (AuthenticationException e) {
             throw new EneanceException(WsError.USER_CANT_LOGIN);
