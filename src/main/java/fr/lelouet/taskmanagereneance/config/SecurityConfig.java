@@ -2,6 +2,7 @@ package fr.lelouet.taskmanagereneance.config;
 
 import fr.lelouet.taskmanagereneance.service.CustomUserDetailsService;
 import fr.lelouet.taskmanagereneance.webservices.utils.jwt.JwtRequestFilter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -13,12 +14,16 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
 // Active la sécurité au niveau des méthodes plutot que de les gérer unitairement
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig {
+
+    @Autowired
+    private JwtRequestFilter jwtRequestFilter;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -31,7 +36,8 @@ public class SecurityConfig {
             .sessionManagement()
             .sessionCreationPolicy(SessionCreationPolicy.STATELESS); // Pas de session, car JWT est utilisé
 
-        /*http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);*/
+        // Ajouter le filtre JWT avant le UsernamePasswordAuthenticationFilter
+        http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }

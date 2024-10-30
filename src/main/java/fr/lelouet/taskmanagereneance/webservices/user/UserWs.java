@@ -3,7 +3,7 @@ package fr.lelouet.taskmanagereneance.webservices.user;
 import fr.lelouet.taskmanagereneance.controller.UserController;
 import fr.lelouet.taskmanagereneance.model.User;
 import fr.lelouet.taskmanagereneance.service.CustomUserDetailsService;
-import fr.lelouet.taskmanagereneance.webservices.enums.WsError;
+import fr.lelouet.taskmanagereneance.webservices.utils.error_handler.WsError;
 import fr.lelouet.taskmanagereneance.webservices.user.bean.LoginRequest;
 import fr.lelouet.taskmanagereneance.webservices.user.bean.UserRegisterRequest;
 import fr.lelouet.taskmanagereneance.webservices.user.bean.UserResponse;
@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 /**
- * WS non identifiés des utilisateurs.
+ * WS des utilisateurs
  */
 @RestController
 @RequestMapping("/users")

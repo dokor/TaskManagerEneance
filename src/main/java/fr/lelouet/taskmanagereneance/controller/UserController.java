@@ -2,7 +2,7 @@ package fr.lelouet.taskmanagereneance.controller;
 
 import fr.lelouet.taskmanagereneance.model.User;
 import fr.lelouet.taskmanagereneance.service.UserService;
-import fr.lelouet.taskmanagereneance.webservices.enums.WsError;
+import fr.lelouet.taskmanagereneance.webservices.utils.error_handler.WsError;
 import fr.lelouet.taskmanagereneance.webservices.user.bean.UserRegisterRequest;
 import fr.lelouet.taskmanagereneance.webservices.utils.error_handler.EneanceException;
 import org.springframework.beans.factory.annotation.Autowired;

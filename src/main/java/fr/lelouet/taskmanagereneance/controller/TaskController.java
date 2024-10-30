@@ -2,32 +2,23 @@ package fr.lelouet.taskmanagereneance.controller;
 
 import fr.lelouet.taskmanagereneance.model.Task;
 import fr.lelouet.taskmanagereneance.service.TaskService;
+import fr.lelouet.taskmanagereneance.webservices.task.bean.TaskRegisterRequest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Service;
 
-import java.security.Principal;
 import java.util.List;
 
-@RestController
-@RequestMapping("/tasks")
+@Service
 public class TaskController {
 
     @Autowired
     private TaskService taskService;
 
-    @PostMapping
-    public ResponseEntity<Task> createTask(@RequestBody Task task, Principal principal) {
-        Task newTask = taskService.createTask(task, principal.getName());
-        return ResponseEntity.ok(newTask);
+    public List<Task> getTasks() {
+        return taskService.getTasks();
     }
 
-    @GetMapping
-    public ResponseEntity<List<Task>> getTasks(Principal principal) {
-        return ResponseEntity.ok(taskService.getTasks(principal.getName()));
+    public Task register(TaskRegisterRequest taskRegisterRequest) {
+        return taskService.createTask(taskRegisterRequest);
     }
 }
