@@ -1,6 +1,5 @@
 package fr.lelouet.taskmanagereneance.webservices.utils.error_handler;
 
-import fr.lelouet.taskmanagereneance.webservices.enums.WsError;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;

@@ -1,4 +1,4 @@
-package fr.lelouet.taskmanagereneance.webservices.enums;
+package fr.lelouet.taskmanagereneance.webservices.utils.error_handler;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -16,8 +16,9 @@ public enum WsError {
     USER_NOT_FOUND("USER_NOT_FOUND", "User not found"),
     USER_CANT_BE_CREATED("USER_CANT_BE_CREATED", "User can't be created"),
     USER_CANT_LOGIN("USER_CANT_LOGIN", "User can't be logged"),
-    EMAIL_ALREADY_EXISTS("EMAIL_ALREADY_EXISTS", "Email already in use")
+    EMAIL_ALREADY_EXISTS("EMAIL_ALREADY_EXISTS", "Email already in use"),
     // TASK Errors
+    TASK_CANT_BE_CREATED("TASK_CANT_BE_CREATED", "Task can't be created")
     ;
 
     private final String code;

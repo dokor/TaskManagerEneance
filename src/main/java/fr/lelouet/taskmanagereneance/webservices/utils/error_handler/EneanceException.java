@@ -1,7 +1,5 @@
 package fr.lelouet.taskmanagereneance.webservices.utils.error_handler;
 
-import fr.lelouet.taskmanagereneance.webservices.enums.WsError;
-
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
