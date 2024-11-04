@@ -2,18 +2,21 @@ package fr.lelouet.taskmanagereneance.webservices.task;
 
 import fr.lelouet.taskmanagereneance.controller.TaskController;
 import fr.lelouet.taskmanagereneance.model.Task;
+import fr.lelouet.taskmanagereneance.webservices.task.bean.TaskAssociateRequest;
 import fr.lelouet.taskmanagereneance.webservices.task.bean.TaskRegisterRequest;
+import fr.lelouet.taskmanagereneance.webservices.task.bean.TaskUpdateRequest;
 import fr.lelouet.taskmanagereneance.webservices.utils.error_handler.WsError;
 import fr.lelouet.taskmanagereneance.webservices.utils.error_handler.EneanceException;
 import fr.lelouet.taskmanagereneance.webservices.utils.jwt.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -39,7 +42,6 @@ public class TaskWs {
 
     // Défini comme sans authentification dans SecurityConfig
     @PostMapping("/add")
-    @PreAuthorize("permitAll()")
     public ResponseEntity<Task> addTask(@RequestBody TaskRegisterRequest taskRegisterRequest) {
         try {
             Task newTask = taskController.register(taskRegisterRequest);
@@ -50,20 +52,43 @@ public class TaskWs {
         }
     }
 
-    @GetMapping()
-    public ResponseEntity<?> getUserTasks() {
-        // Récupérer l'utilisateur authentifié
-        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        String username = userDetails.getUsername();
+    @DeleteMapping
+    public ResponseEntity<Void> deleteTask() {
+        // TODO
+        return ResponseEntity.noContent().build();
+    }
 
-        // Utilisez le nom d'utilisateur ou d'autres détails pour récupérer les tâches de l'utilisateur
-        // Exemple :
+    @GetMapping()
+    public ResponseEntity<List<Task>> getUserTasks() {
         List<Task> tasks = taskController.getTasks();
         return ResponseEntity.ok(tasks);
     }
 
-    // DELETE
-    // UPDATE
-    // GET ALL
-    // GET ID
+    @PutMapping
+    public ResponseEntity<Task> associateCurentUserToTask(@RequestBody TaskAssociateRequest taskAssociateRequest) {
+        // TODO
+        // Recupt l'utilisateur courant
+        getUserDetails();
+        // Vérifier que le bean est bien rempli
+        return ResponseEntity.ok(taskController.associateUserToTask(taskAssociateRequest));
+    }
+
+    @PutMapping
+    public ResponseEntity<Task> updateTask(@RequestBody TaskUpdateRequest taskUpdateRequest) {
+        // TODO
+        // Recupt l'utilisateur courant
+        getUserDetails();
+        // Vérifier que le bean est bien rempli
+        return ResponseEntity.ok(taskController.updateTask(taskUpdateRequest));
+    }
+
+    @GetMapping
+    public ResponseEntity<Task> getTaskById(@RequestBody TaskAssociateRequest taskAssociateRequest) {
+        return ResponseEntity.ok(taskController.getTaskById(taskAssociateRequest));
+    }
+
+    private UserDetails getUserDetails() {
+        // Récupérer l'utilisateur authentifié
+        return (UserDetails) SecurityContextHolder.getContext().getAuthentication().getDetails();
+    }
 }
