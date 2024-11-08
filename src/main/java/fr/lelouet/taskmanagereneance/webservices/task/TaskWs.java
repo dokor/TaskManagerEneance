@@ -9,6 +9,7 @@ import fr.lelouet.taskmanagereneance.webservices.utils.error_handler.WsError;
 import fr.lelouet.taskmanagereneance.webservices.utils.error_handler.EneanceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -31,6 +32,10 @@ public class TaskWs {
 
     @Autowired
     private TaskController taskController;
+
+    @Autowired
+    private AuthenticationManager authenticationManager;
+
 
     // Défini comme sans authentification dans SecurityConfig
     @PostMapping("/add")
@@ -55,7 +60,7 @@ public class TaskWs {
         return ResponseEntity.ok(tasks);
     }
 
-    @PutMapping
+    @PutMapping("/associate")
     public ResponseEntity<Task> associateCurentUserToTask(@RequestBody TaskAssociateRequest taskAssociateRequest) {
         // Recupt l'utilisateur courant
         getUserDetails();
@@ -63,14 +68,14 @@ public class TaskWs {
         return ResponseEntity.ok(taskController.associateUserToTask(taskAssociateRequest));
     }
 
-    @PutMapping
+    @PutMapping("/update")
     public ResponseEntity<Task> updateTask(@RequestBody TaskUpdateRequest taskUpdateRequest) {
         getUserDetails();
         // TODO Validation que le bean est bien rempli
         return ResponseEntity.ok(taskController.updateTask(taskUpdateRequest));
     }
 
-    @GetMapping
+    @GetMapping("/{id}")
     public ResponseEntity<Task> getTaskById(@RequestBody TaskAssociateRequest taskAssociateRequest) {
         // TODO : Vérifier que l'utilisateur a le droit de récupérer la tache => RG : la tache lui appartient ou n'appartient a personne
         return ResponseEntity.ok(taskController.getTaskById(taskAssociateRequest));
