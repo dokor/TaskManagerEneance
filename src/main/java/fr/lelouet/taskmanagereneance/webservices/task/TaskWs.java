@@ -7,10 +7,8 @@ import fr.lelouet.taskmanagereneance.webservices.task.bean.TaskRegisterRequest;
 import fr.lelouet.taskmanagereneance.webservices.task.bean.TaskUpdateRequest;
 import fr.lelouet.taskmanagereneance.webservices.utils.error_handler.WsError;
 import fr.lelouet.taskmanagereneance.webservices.utils.error_handler.EneanceException;
-import fr.lelouet.taskmanagereneance.webservices.utils.jwt.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -33,9 +31,6 @@ public class TaskWs {
 
     @Autowired
     private TaskController taskController;
-
-    @Autowired
-    private JwtUtil jwtUtil;
 
     // Défini comme sans authentification dans SecurityConfig
     @PostMapping("/add")
