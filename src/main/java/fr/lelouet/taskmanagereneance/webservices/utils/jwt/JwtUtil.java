@@ -11,7 +11,7 @@ import java.util.Date;
 import java.util.Map;
 
 /**
- * Composant utilitaire permettant de construire et utiliser un token simple
+ * Composant utilitaire permettant de construire et utiliser un token JWT simple
  */
 @Component
 public class JwtUtil {
@@ -22,7 +22,7 @@ public class JwtUtil {
 
     public String generateToken(String username, Long userId, String firstName, String lastName) {
         return Jwts.builder()
-            .setSubject(username)
+            .setSubject(username) // TODO a adapter
             .setIssuedAt(new Date())
             .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10)) // 10 heures
             .addClaims(Map.of(

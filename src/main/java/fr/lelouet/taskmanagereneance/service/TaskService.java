@@ -22,7 +22,7 @@ public class TaskService {
         task.setCategory(taskRegisterRequest.getCategory());
         task.setLabel(taskRegisterRequest.getLabel());
         task.setDueDate(taskRegisterRequest.getDueDate());
-        task.setDone(false);
+        task.setDone(false); // RG : par défaut la tache est crée a non réalisé
         return taskRepository.save(task);
     }
 

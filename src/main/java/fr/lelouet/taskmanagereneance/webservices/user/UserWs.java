@@ -50,7 +50,7 @@ public class UserWs {
     public ResponseEntity<UserResponse> registerUser(@RequestBody UserRegisterRequest userRegisterRequest) {
         try {
             User newUser = userController.registerUser(userRegisterRequest);
-            // TODO alelouet : ajouter validation des données
+            // TODO : ajouter validation des données d'entrée
             UserResponse userResponse = new UserResponse(
                 newUser.getId(),
                 newUser.getEmail(),

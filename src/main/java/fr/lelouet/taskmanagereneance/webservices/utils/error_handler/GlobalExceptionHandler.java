@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
-    // TODO alelouet : Modfier le handler pour avoir un générique et avoir un handler par Ws si besoin
+    // TODO : Modfier le handler pour avoir un générique métier et avoir un handler par Ws si necessaire
     @ExceptionHandler(EneanceException.class)
     public ResponseEntity<ErrorResponse> handleUserNotFoundException(EneanceException ex) {
         WsError error = ex.getError();

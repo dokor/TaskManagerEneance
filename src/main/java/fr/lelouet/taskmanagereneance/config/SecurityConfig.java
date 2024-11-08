@@ -31,7 +31,7 @@ public class SecurityConfig {
             .csrf().disable() // Désactiver CSRF pour éviter les 403 sur POST en local
             .authorizeRequests()
             .requestMatchers("/users/register", "/users/login").permitAll() // Routes publiques
-            .anyRequest().authenticated() // Authentification requise pour toutes les autres routes
+            .anyRequest().authenticated() // RG : Authentification requise pour toutes les autres routes
             .and()
             .sessionManagement()
             .sessionCreationPolicy(SessionCreationPolicy.STATELESS); // Pas de session, car JWT est utilisé

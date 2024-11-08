@@ -35,9 +35,6 @@ public class TaskWs {
     private TaskController taskController;
 
     @Autowired
-    private AuthenticationManager authenticationManager;
-
-    @Autowired
     private JwtUtil jwtUtil;
 
     // Défini comme sans authentification dans SecurityConfig
@@ -54,7 +51,6 @@ public class TaskWs {
 
     @DeleteMapping
     public ResponseEntity<Void> deleteTask() {
-        // TODO
         return ResponseEntity.noContent().build();
     }
 
@@ -66,29 +62,27 @@ public class TaskWs {
 
     @PutMapping
     public ResponseEntity<Task> associateCurentUserToTask(@RequestBody TaskAssociateRequest taskAssociateRequest) {
-        // TODO
         // Recupt l'utilisateur courant
         getUserDetails();
-        // Vérifier que le bean est bien rempli
+        // TODO Validation que le bean d'entrée est bien rempli
         return ResponseEntity.ok(taskController.associateUserToTask(taskAssociateRequest));
     }
 
     @PutMapping
     public ResponseEntity<Task> updateTask(@RequestBody TaskUpdateRequest taskUpdateRequest) {
-        // TODO
-        // Recupt l'utilisateur courant
         getUserDetails();
-        // Vérifier que le bean est bien rempli
+        // TODO Validation que le bean est bien rempli
         return ResponseEntity.ok(taskController.updateTask(taskUpdateRequest));
     }
 
     @GetMapping
     public ResponseEntity<Task> getTaskById(@RequestBody TaskAssociateRequest taskAssociateRequest) {
+        // TODO : Vérifier que l'utilisateur a le droit de récupérer la tache => RG : la tache lui appartient ou n'appartient a personne
         return ResponseEntity.ok(taskController.getTaskById(taskAssociateRequest));
     }
 
     private UserDetails getUserDetails() {
-        // Récupérer l'utilisateur authentifié
+        // TODO Récupérer l'utilisateur authentifié
         return (UserDetails) SecurityContextHolder.getContext().getAuthentication().getDetails();
     }
 }

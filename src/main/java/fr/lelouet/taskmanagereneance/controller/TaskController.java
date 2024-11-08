@@ -26,8 +26,8 @@ public class TaskController {
     }
 
     public Task associateUserToTask(TaskAssociateRequest taskAssociateRequest) {
-        // TODO : Vérifier que l'utilisateur a bien le droit de modifier la Task
-        // TODO : virer cette ligne :
+        // TODO : Vérifier que l'utilisateur a bien le droit de modifier la task
+        // TODO : virer cette ligne une fois que l'utilisateur a été correctement récupéré
         User user = new User();
         return taskService.associateUserToTask(taskAssociateRequest, user);
     }

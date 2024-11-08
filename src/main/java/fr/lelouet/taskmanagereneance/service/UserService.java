@@ -11,7 +11,6 @@ import java.util.Optional;
 
 /**
  * Service fonctionelle de gestion des utilisateurs
- * // TODO alelouet : a diviser en service fonctionelle si besoin
  */
 @Service
 public class UserService {
@@ -23,14 +22,11 @@ public class UserService {
     private PasswordEncoder passwordEncoder;
 
     public User registerUser(UserRegisterRequest request) {
-        // Conversion UserRegisterRequest en User
         User user = new User();
         user.setEmail(request.getEmail());
         user.setFirstName(request.getFirstName());
         user.setLastName(request.getLastName());
-        user.setPassword(passwordEncoder.encode(request.getPassword())); // Hash du mot de passe
-
-        // Sauvegarde en base de données
+        user.setPassword(passwordEncoder.encode(request.getPassword())); // MDP hashé
         return userRepository.save(user);
     }
 

@@ -25,16 +25,16 @@ public class Task {
     private Long id;
 
     private String label;
-    private String category; // TODO alelouet : relier la catégory avec les futures catégories dispo pour les users (BDD)
+    private String category; // TODO : relier la catégory avec les futures catégories dispo pour les users (BDD)
     private LocalDate dueDate;
     private boolean done;
     private LocalDate createDate;
     private LocalDate lastModificationDate;
 
-    // TODO alelouet : ajouter utilisateur crea/modif
+    // TODO : ajouter utilisateur crea/modif
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = true) // TODO alelouet : Faire un choix sur la possibilité d'avoir des taches sans user
+    @JoinColumn(name = "user_id", nullable = true) // TODO : Faire un choix sur la possibilité d'avoir des taches sans user
     private User user;
 
 }
